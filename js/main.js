@@ -43,13 +43,25 @@ function preload() {
     this.load.audio('ambience', ['/assets/audio/bros.mp3']);
 }
 
-var music;
+let music;
 
 function create() {
 
-    music = game.sound.play('ambience');
+    this.sound.play('ambience'); // Play music
 
-    // music.play();
+
+    //Audio
+    // this.levelMusic.play('', 0, 1, true);
+    // this.levelMusic.onLoop.add(this.playLevelMusic, this);
+
+    // function playLevelMusic() {
+    //     this.levelMusic.play('', 0, 1, true);
+    // }
+    //Audio
+    // this.game.load.audio('sonido', 'url/to/sound.wav');
+    // this.sfx.sonido = this.game.add.audio('sonido');
+    // this.sfx.sonido.loopFull();
+
     // music.loop = true; // This is what you are lookig for
     // music.play();
 
@@ -117,8 +129,6 @@ function create() {
     this.physics.add.overlap(player, stars, collectStar, null, this);
     this.physics.add.collider(player, bombs, hitBomb, null, this);
 }
-
-
 
 function update() {
 
