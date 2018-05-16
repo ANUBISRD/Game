@@ -28,6 +28,7 @@ var score = 0;
 var scoreText;
 var helpText;
 
+
 var game = new Phaser.Game(config);
 
 function preload() {
@@ -43,24 +44,12 @@ function preload() {
     this.load.audio('ambience', ['/assets/audio/bros.mp3']);
 }
 
-let music;
+var music;
 
 function create() {
 
     this.sound.play('ambience'); // Play music
 
-
-    //Audio
-    // this.levelMusic.play('', 0, 1, true);
-    // this.levelMusic.onLoop.add(this.playLevelMusic, this);
-
-    // function playLevelMusic() {
-    //     this.levelMusic.play('', 0, 1, true);
-    // }
-    //Audio
-    // this.game.load.audio('sonido', 'url/to/sound.wav');
-    // this.sfx.sonido = this.game.add.audio('sonido');
-    // this.sfx.sonido.loopFull();
 
     // music.loop = true; // This is what you are lookig for
     // music.play();
@@ -83,6 +72,7 @@ function create() {
 
     this.anims.create({
         key: 'left',
+        // setting images (wich frame to use)
         frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
         frameRate: 10,
         repeat: -1
@@ -99,7 +89,8 @@ function create() {
         frameRate: 10,
         repeat: -1
     });
-
+    //  This will create a new object called "cursors", inside it will contain 4 objects: up, down, left and right.
+    //  These are all Phaser.Key objects, so anything you can do with a Key object you can do with these.
     cursors = this.input.keyboard.createCursorKeys();
 
     //  Some stars to collect, 12 in total, evenly spaced 70 pixels apart along the x axis
