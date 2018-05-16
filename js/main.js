@@ -42,6 +42,7 @@ function preload() {
         frameHeight: 48
     });
     this.load.audio('ambience', ['/assets/audio/bros.mp3']);
+    this.load.audio('boom', ['/assets/audio/bomb.mp3']);
 }
 
 var music;
@@ -174,6 +175,8 @@ function collectStar(player, star) {
 }
 
 function hitBomb(player, bomb) {
+
+    this.sound.play('boom'); // Play music
     this.physics.pause();
 
     player.setTint(0xff0000);
