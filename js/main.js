@@ -49,11 +49,9 @@ var music;
 
 function create() {
 
-    this.sound.play('ambience'); // Play music
+    // this.sound.play('ambience'); // Play music
 
-
-    // music.loop = true; // This is what you are lookig for
-    // music.play();
+    this.sound.play('ambience', { loop: true }); // Finaly loop :)
 
 
     this.add.image(400, 300, 'background');
@@ -148,6 +146,7 @@ function update() {
 }
 
 function collectStar(player, star) {
+    // Eat stars
     star.disableBody(true, true);
 
     //  Add and update the score
@@ -155,7 +154,7 @@ function collectStar(player, star) {
     scoreText.setText('Score: ' + score);
 
 
-    if (stars.countActive(true) === 0) {
+    if (stars.countActive(true) == 0) {
         //  A new batch of stars to collect
         stars.children.iterate(function(child) {
 
@@ -164,11 +163,11 @@ function collectStar(player, star) {
         });
 
         var x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
-
+        // console.log('X is ...  ' + x);
         var bomb = bombs.create(x, 16, 'bomb');
         bomb.setBounce(1);
         bomb.setCollideWorldBounds(true);
-        bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
+        bomb.setVelocity(Phaser.Math.Between(-200, 200), 20); // Bomb speed
         bomb.allowGravity = false;
 
     }
@@ -177,11 +176,22 @@ function collectStar(player, star) {
 function hitBomb(player, bomb) {
 
     this.sound.play('boom'); // Play music
+    player.allowGravity = false;
     this.physics.pause();
-
-    player.setTint(0xff0000);
 
     player.anims.play('turn');
 
+    GameOver();
+}
+
+// this.sound.play('ambience', { loop: true });
+
+function GameOver() {
+
+    console.log('game Over stage');
+    // this.sound.play('ambience', { loop: false }); //NO
+    // this.sound.pause('ambience', { pause: true }); //NO
+
+    player.setTint(0xff0000);
     gameOver = true;
 }
